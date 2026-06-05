@@ -1,0 +1,63 @@
+/* ============================================================
+   Brain OS — global tokens + reset
+   Palette ported from the original prototype: cream ground,
+   salmon / lavender / sage / olive accents, monospace chrome.
+   ============================================================ */
+:root {
+  --ink: #141210;
+  --paper: #ffffff;
+  --cream: #fbfbe6;        /* desktop ground */
+  --muted: #777;
+  --border: #e5e5e2;
+  --accent: #dd1144;       /* close-button / hover red */
+
+  /* project accent colors (folder + window tints) */
+  --salmon: #f59285;
+  --lavender: #c9aede;
+  --sage: #b9d99a;
+  --olive: #a8a35e;
+
+  --mono: 'Courier New', Courier, monospace;
+  --serif: Georgia, 'Times New Roman', serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--mono);
+  overflow: hidden;            /* the desktop never scrolls */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ============================================================
+   Ribbon draw-in animation (ported verbatim from the original).
+   These class names are set by the engine via setAttribute, so they
+   MUST be global (un-scoped) — do not move into a CSS module.
+   Animates stroke-dashoffset from the path's full length to 0,
+   revealing each ribbon as if drawn by a pen.
+   ============================================================ */
+@keyframes ribbon-draw {
+  from { stroke-dashoffset: var(--dash-len); }
+  to   { stroke-dashoffset: 0; }
+}
+@keyframes ribbon-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.ribbon-stroke-draw {
+  stroke-dasharray: var(--dash-len);
+  stroke-dashoffset: var(--dash-len);
+  animation: ribbon-draw 320ms ease-out forwards;
+}
+.ribbon-fill-fade {
+  opacity: 0;
+  animation: ribbon-fade 320ms ease-out forwards;
+  animation-delay: 60ms;
+}

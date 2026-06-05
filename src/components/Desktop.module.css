@@ -1,0 +1,13 @@
+.desktop {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  font-family: var(--mono);
+}
+
+/* Root icon layer sits above the wallpaper, below windows */
+.iconLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+}

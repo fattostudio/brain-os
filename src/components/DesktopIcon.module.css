@@ -1,0 +1,39 @@
+.icon {
+  position: absolute;
+  width: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: grab;
+  user-select: none;
+  text-align: center;
+}
+.icon:active { cursor: grabbing; }
+
+.glyph {
+  width: 64px;
+  height: 54px;
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.18));
+  transition: transform 0.12s ease;
+}
+.glyph svg { width: 100%; height: 100%; display: block; }
+.icon:hover .glyph { transform: translateY(-2px); }
+.selected .glyph { transform: translateY(-2px) scale(1.04); }
+
+.label {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: rgba(255, 255, 253, 0.82);
+  padding: 1px 6px;
+  border-radius: 2px;
+  line-height: 1.25;
+  max-width: 100%;
+  word-break: break-word;
+}
+.selected .label {
+  background: var(--ink);
+  color: var(--paper);
+}

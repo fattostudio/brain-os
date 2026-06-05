@@ -1,0 +1,19 @@
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;            /* sits behind the desktop layer */
+  background: var(--cream);
+  pointer-events: none;  /* never intercepts clicks meant for icons/windows */
+
+  /* The engine fills non-letter ribbons with var(--paper). Remapping --paper
+     to the cream ground HERE (scoped to the wallpaper) makes the ribbons the
+     same color as the background, so only their dark outlines read — a clean
+     line-weave on cream. Windows/docs elsewhere keep the real white --paper. */
+  --paper: var(--cream);
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}

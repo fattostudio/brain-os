@@ -1,0 +1,50 @@
+.doc {
+  padding: 1.7rem 2rem 2.4rem;
+  max-width: 640px;
+  font-family: var(--serif);
+  color: var(--ink);
+  line-height: 1.65;
+}
+
+/* eyebrow / kicker — the MDX uses a leading H1 as the small label */
+.doc :global(h1) {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 1.3rem;
+  font-weight: 400;
+}
+.doc :global(h2) {
+  font-size: 1.7rem;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+  letter-spacing: -0.01em;
+}
+.doc :global(h3) {
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 1.9rem 0 0.5rem;
+  font-weight: 400;
+}
+.doc :global(p) { margin: 0 0 1rem; font-size: 1.02rem; }
+.doc :global(p:first-of-type) { font-size: 1.16rem; line-height: 1.55; }
+.doc :global(ul) { margin: 0 0 1rem 1.1rem; }
+.doc :global(li) { margin-bottom: 0.4rem; }
+.doc :global(em) { font-style: italic; }
+.doc :global(hr) {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 1.8rem 0;
+}
+.doc :global(.meta) {
+  font-family: var(--mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
