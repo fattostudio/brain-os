@@ -13,6 +13,22 @@
   box-shadow: 8px 10px 0 rgba(20, 18, 16, 0.35);
 }
 
+/* Expanded ("maximized") state: near-fullscreen, fixed to the viewport.
+   Overrides the inline left/top/width via position:fixed + !important so the
+   floating coordinates don't apply. A small inset keeps a sliver of desktop
+   visible at the edges, preserving the OS feel. */
+.expanded {
+  position: fixed !important;
+  left: 12px !important;
+  top: 12px !important;
+  width: auto !important;
+  right: 12px;
+  bottom: 12px;
+  max-width: none;
+  max-height: none;
+  box-shadow: 8px 10px 0 rgba(20, 18, 16, 0.35);
+}
+
 .titlebar {
   background: var(--ink);
   color: var(--paper);
@@ -20,12 +36,15 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 0.4rem 0 0.9rem;
+  padding: 0 0.3rem 0 0.9rem;
   cursor: grab;
   user-select: none;
   flex-shrink: 0;
+  gap: 0.5rem;
 }
 .titlebar:active { cursor: grabbing; }
+/* No grab cursor when expanded — dragging is disabled in that state. */
+.expanded .titlebar { cursor: default; }
 
 .title {
   font-family: var(--mono);
@@ -36,8 +55,15 @@
   text-overflow: ellipsis;
 }
 
-.close {
-  width: 26px;
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.ctrl {
+  width: 28px;
   height: 26px;
   background: transparent;
   border: none;
@@ -49,11 +75,21 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  padding: 0;
 }
-.close:hover { background: var(--accent); }
+.ctrl:hover { background: rgba(255,255,255,0.16); }
+/* the close button (last control) goes red on hover */
+.ctrl:last-child:hover { background: var(--accent); }
 
 .body {
   flex: 1;
   overflow: auto;
   background: var(--paper);
+  -webkit-overflow-scrolling: touch;   /* momentum scroll on iOS */
+}
+
+/* On phones, keep FLOATING windows compact (so several can scatter without
+   each one swallowing the screen). The expanded state overrides this. */
+@media (max-width: 640px) {
+  .win:not(.expanded) { max-height: 56vh; }
 }
