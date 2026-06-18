@@ -32,7 +32,7 @@
 .titlebar {
   background: var(--ink);
   color: var(--paper);
-  height: 34px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -63,12 +63,12 @@
 }
 
 .ctrl {
-  width: 28px;
-  height: 26px;
+  width: 36px;
+  height: 36px;
   background: transparent;
   border: none;
   color: var(--paper);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1;
   cursor: pointer;
   display: flex;

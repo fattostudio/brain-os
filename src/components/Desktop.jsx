@@ -44,12 +44,27 @@ export default function Desktop() {
       const next = topZ + 1;
       setTopZ(next);
       offset.current = (offset.current + 1) % 6;
-      const o = offset.current * 26;
-      // Clamp the spawn so windows open on-screen even on narrow phones.
       const vw = typeof window !== 'undefined' ? window.innerWidth : 1200;
-      const baseX = vw < 640 ? 12 : 160;
-      const baseY = vw < 640 ? 64 : 90;
-      return [...ws, { key: _seq++, nodeId, z: next, spawn: { x: baseX + o, y: baseY + o } }];
+      const isMobile = vw < 640;
+      // Stagger each new window so they don't stack exactly; smaller step on
+      // mobile so they stay within the screen.
+      const step = isMobile ? 14 : 26;
+      const o = offset.current * step;
+      let spawnX, spawnY;
+      if (isMobile) {
+        // On mobile, windows open at ~78% width (see Window.jsx, which caps the
+        // configured width to vw*0.78). Keep the WHOLE window on-screen: clamp
+        // x so the right edge never passes the viewport. 12px margins each side.
+        const cfgW = (nodes[nodeId] && nodes[nodeId].window && nodes[nodeId].window.width) || 460;
+        const winW = Math.min(cfgW, Math.round(vw * 0.78));
+        const maxX = Math.max(12, vw - winW - 12);
+        spawnX = Math.min(12 + o, maxX);
+        spawnY = 64 + o;
+      } else {
+        spawnX = 160 + o;
+        spawnY = 90 + o;
+      }
+      return [...ws, { key: _seq++, nodeId, z: next, spawn: { x: spawnX, y: spawnY } }];
     });
   }, [topZ]);
 

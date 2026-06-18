@@ -11,12 +11,15 @@
   border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  z-index: 500;
+  z-index: 4;            /* closed: sits BELOW open windows (which start at z~10) */
   transform: translateX(100%);
   transition: transform 0.25s ease;
   font-family: var(--mono);
 }
-.sidebarOpen { transform: translateX(0); }
+.sidebarOpen {
+  transform: translateX(0);
+  z-index: 5000;         /* open: the control panel comes to the front */
+}
 
 .header {
   padding: 1rem 1.25rem;
@@ -139,7 +142,7 @@
   position: fixed;
   top: 1rem;
   right: 1rem;
-  z-index: 501;
+  z-index: 4;            /* closed: below open windows so it never blocks them */
   width: 36px;
   height: 36px;
   padding: 0;
@@ -153,4 +156,7 @@
   transition: right 0.25s ease, background 0.15s ease, color 0.15s ease;
 }
 .toggle:hover { background: var(--ink); color: var(--paper); }
-.toggleOpen { right: calc(260px + 1rem); }
+.toggleOpen {
+  right: calc(260px + 1rem);
+  z-index: 5001;         /* open: stays above the panel so you can close it */
+}

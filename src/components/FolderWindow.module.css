@@ -1,6 +1,9 @@
 .folder {
   position: relative;
   min-height: 240px;
-  min-width: 320px;
+  min-width: 220px;
   padding: 8px;
+}
+@media (min-width: 640px) {
+  .folder { min-width: 320px; }
 }
