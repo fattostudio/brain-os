@@ -29,7 +29,7 @@ export default function FolderWindow({ items, onOpenChild }) {
       {items.map((item, i) => (
         <DesktopIcon
           key={item.id}
-          kind={item.kind === 'app' ? 'doc' : item.kind} /* app icon reuses doc-ish glyph */
+          kind={item.kind}
           label={item.label}
           color="var(--paper)"
           initial={{ x: pad + (i % cols) * colStep, y: pad + Math.floor(i / cols) * rowStep }}

@@ -6,6 +6,7 @@ import DocViewer from './DocViewer.jsx';
 import FolderWindow from './FolderWindow.jsx';
 import AppLauncher from './AppLauncher.jsx';
 import DemoViewer from './DemoViewer.jsx';
+import PhoneOverlay from './PhoneOverlay.jsx';
 import Sidebar from './Sidebar.jsx';
 import { nodes, desktop } from '../content/filesystem.js';
 import styles from './Desktop.module.css';
@@ -22,6 +23,9 @@ export default function Desktop() {
   const [engine, setEngine] = useState(null);
   const [stats, setStats] = useState({ count: '0', attempts: '0', status: 'ready', error: '' });
 
+  // fullscreen phone overlay (for mobile-only apps launched on desktop)
+  const [phoneApp, setPhoneApp] = useState(null);  // { name, url } | null
+
   const focusWindow = useCallback((key) => {
     setTopZ((z) => {
       const next = z + 1;
@@ -31,6 +35,31 @@ export default function Desktop() {
   }, []);
 
   const openNode = useCallback((nodeId) => {
+    // --- Launcher intercept ---------------------------------------------
+    // An 'app' node with a URL doesn't open a normal window: it either opens
+    // the real app in a new tab, or (for mobile-only apps on desktop) a
+    // centered phone overlay. Only the "coming soon" case (no URL) falls
+    // through to a placeholder window.
+    const node = nodes[nodeId];
+    if (node && node.kind === 'app' && node.app && node.app.url) {
+      const { mode, url, name } = node.app;
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+      if (mode === 'tab') {
+        window.open(url, '_blank', 'noopener,noreferrer');
+        return;
+      }
+      if (mode === 'phone') {
+        if (isMobile) {
+          // On a phone, the device IS the frame — just open full-page.
+          window.open(url, '_blank', 'noopener,noreferrer');
+        } else {
+          // On desktop, show the app inside a centered phone frame.
+          setPhoneApp({ name, url });
+        }
+        return;
+      }
+    }
+
     setWindows((ws) => {
       // if already open, just focus it
       const existing = ws.find((w) => w.nodeId === nodeId);
@@ -134,6 +163,14 @@ export default function Desktop() {
           </div>
         );
       })}
+
+      {phoneApp && (
+        <PhoneOverlay
+          name={phoneApp.name}
+          url={phoneApp.url}
+          onClose={() => setPhoneApp(null)}
+        />
+      )}
     </div>
   );
 }

@@ -28,17 +28,43 @@ function DocGlyph() {
   );
 }
 
-/**
- * Draggable desktop icon. Distinguishes a click (open) from a drag (move)
- * using a small movement threshold so dragging never accidentally opens.
- *
- * Props:
- *   kind     'folder' | 'doc'
- *   label    string
- *   color    string   — folder tint (ignored for docs)
- *   initial  {x,y}
- *   onOpen   fn        — fired on a click that wasn't a drag
- */
+/** A video-file glyph: a frame with a play triangle. */
+function VideoGlyph() {
+  return (
+    <svg viewBox="0 0 64 54" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="10" width="48" height="34" rx="3"
+            fill="#ffffff" stroke="#141210" strokeWidth="2" />
+      {/* sprocket strip down the left, like a film reel */}
+      <g stroke="#141210" strokeWidth="2">
+        <line x1="16" y1="10" x2="16" y2="44" />
+      </g>
+      <g fill="#141210">
+        <rect x="10.5" y="14" width="3" height="3" />
+        <rect x="10.5" y="22" width="3" height="3" />
+        <rect x="10.5" y="30" width="3" height="3" />
+        <rect x="10.5" y="38" width="3" height="3" />
+      </g>
+      {/* play triangle */}
+      <path d="M30 19 L44 27 L30 35 Z"
+            fill="#141210" stroke="#141210" strokeWidth="2" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/** A generic app-launcher glyph: a rounded app tile with a launch mark. */
+function AppGlyph({ color }) {
+  return (
+    <svg viewBox="0 0 64 54" xmlns="http://www.w3.org/2000/svg">
+      <rect x="14" y="6" width="36" height="42" rx="8"
+            fill={color || '#ffffff'} stroke="#141210" strokeWidth="2" />
+      {/* outward launch arrow ↗ */}
+      <g stroke="#141210" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" fill="none">
+        <path d="M27 33 L37 23" />
+        <path d="M30 22 L38 22 L38 30" />
+      </g>
+    </svg>
+  );
+}
 export default function DesktopIcon({ kind, label, color, initial, onOpen }) {
   const [pos, setPos] = useState(initial);
   const [selected, setSelected] = useState(false);
@@ -82,7 +108,10 @@ export default function DesktopIcon({ kind, label, color, initial, onOpen }) {
       onTouchStart={onDown}
     >
       <div className={styles.glyph}>
-        {kind === 'folder' ? <FolderGlyph color={color} /> : <DocGlyph />}
+        {kind === 'folder' ? <FolderGlyph color={color} />
+          : kind === 'video' || kind === 'demo' ? <VideoGlyph />
+          : kind === 'app' ? <AppGlyph color={color} />
+          : <DocGlyph />}
       </div>
       <span className={styles.label}>{label}</span>
     </div>

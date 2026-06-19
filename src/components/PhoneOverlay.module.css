@@ -1,0 +1,70 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 6000;             /* above windows and the sidebar */
+  background: rgba(20, 18, 16, 0.72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.close {
+  align-self: flex-end;
+  background: var(--paper);
+  border: 1.5px solid var(--ink);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  cursor: pointer;
+}
+.close:hover { background: var(--accent); color: var(--paper); border-color: var(--accent); }
+
+/* Phone frame sized to fit tall screens: height drives it, width follows the
+   phone aspect ratio. Caps so it never overflows the viewport. */
+.phone {
+  position: relative;
+  height: min(78vh, 760px);
+  aspect-ratio: 9 / 19.5;
+  background: #000;
+  border: 3px solid var(--ink);
+  border-radius: 36px;
+  box-shadow: 10px 14px 0 rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.notch {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90px;
+  height: 7px;
+  background: var(--paper);
+  border-radius: 4px;
+  z-index: 2;
+}
+.frame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #fff;
+}
+
+.label {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--paper);
+}

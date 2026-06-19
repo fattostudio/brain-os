@@ -77,8 +77,9 @@ export const nodes = {
     label: 'Poco.app',
     app: {
       name: 'Poco',
-      url: null,                 // not built yet → renders "coming soon"
-      mode: 'iframe',            // when live, embed it in a desktop window
+      url: null,                 // not built yet → "coming soon" window
+      mode: 'phone',             // mobile-only app: desktop shows a centered
+                                 // phone frame; mobile opens it full-page.
       caption: 'The Poco app — launching soon.',
       tint: 'rgba(201,174,222,0.28)',
     },
