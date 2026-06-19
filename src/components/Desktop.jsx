@@ -5,6 +5,7 @@ import Window from './Window.jsx';
 import DocViewer from './DocViewer.jsx';
 import FolderWindow from './FolderWindow.jsx';
 import AppLauncher from './AppLauncher.jsx';
+import DemoViewer from './DemoViewer.jsx';
 import Sidebar from './Sidebar.jsx';
 import { nodes, desktop } from '../content/filesystem.js';
 import styles from './Desktop.module.css';
@@ -119,6 +120,7 @@ export default function Desktop() {
               >
                 {node.kind === 'doc' && <DocViewer Doc={node.doc} />}
                 {node.kind === 'app' && <AppLauncher {...node.app} />}
+                {node.kind === 'demo' && <DemoViewer {...node.demo} />}
                 {node.kind === 'folder' && (
                   <FolderWindow
                     items={node.children.map((cid) => ({

@@ -1,0 +1,117 @@
+.demo {
+  padding: 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: #f3f3ef;
+}
+
+/* ---- Phone frame (mobile demos) ---- */
+.phoneFrame {
+  width: 230px;
+  height: 470px;
+  border: 2px solid var(--ink);
+  border-radius: 28px;
+  background: #000;
+  box-shadow: 4px 6px 0 rgba(20, 18, 16, 0.22);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.notch {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70px;
+  height: 6px;
+  background: var(--paper);
+  border-radius: 3px;
+  z-index: 2;
+}
+
+/* ---- Browser frame (web demos) ---- */
+.webFrame {
+  width: 100%;
+  max-width: 520px;
+  border: 2px solid var(--ink);
+  background: #000;
+  box-shadow: 4px 6px 0 rgba(20, 18, 16, 0.22);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.browserBar {
+  height: 26px;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 10px;
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--paper);
+  opacity: 0.85;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+.webFrame .video { height: auto; aspect-ratio: 16 / 10; }
+
+.placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: repeating-linear-gradient(
+    45deg, #1a1a1a, #1a1a1a 10px, #222 10px, #222 20px
+  );
+  color: var(--paper);
+}
+.placeholderLabel {
+  font-family: var(--mono);
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.placeholderSub {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.caption {
+  font-family: var(--mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+  max-width: 280px;
+  line-height: 1.5;
+  margin: 0;
+}
+.deviceTag {
+  font-family: var(--mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+}

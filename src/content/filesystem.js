@@ -11,9 +11,17 @@
      { kind: 'doc',    label, doc: <MDXComponent> }
      { kind: 'folder', label, color, children: [ids...] }
      { kind: 'app',    label, app: { name, url, mode, caption, tint } }
+     { kind: 'demo',   label, demo: { mobileSrc, webSrc, poster, caption, tint } }
 
-   `mode` is per-app: 'tab' opens in a new browser tab, 'iframe' embeds
-   the live app inside a desktop window.
+   `mode` (app) is per-app: 'tab' opens in a new browser tab, 'iframe' embeds.
+   `demo` shows a self-hosted video, picking mobileSrc vs webSrc by device.
+   A null url/src renders a "coming soon" placeholder.
+
+   --- VIDEO HOSTING NOTE ---
+   Do NOT commit large video files into this repo (bloats it; Vercel has size
+   limits). Host the MP4s elsewhere — e.g. Cloudflare R2 / a CDN — and put the
+   public URLs in mobileSrc / webSrc below. (Tiny clips could live in /public,
+   but for real demos prefer external hosting.)
    ============================================================ */
 
 import Manifesto from '../content/Manifesto.mdx';
@@ -33,7 +41,7 @@ export const nodes = {
     kind: 'folder',
     label: 'Poco',
     color: 'var(--lavender)',
-    children: ['poco-about', 'poco-app'],
+    children: ['poco-about', 'poco-demo', 'poco-app'],
     window: { tint: 'rgba(201,174,222,0.28)', width: 420 },
   },
 
@@ -41,7 +49,7 @@ export const nodes = {
     kind: 'folder',
     label: 'Carta',
     color: 'var(--sage)',
-    children: ['carta-about', 'carta-app'],
+    children: ['carta-about', 'carta-demo', 'carta-app'],
     window: { tint: 'rgba(185,217,154,0.30)', width: 420 },
   },
 
@@ -51,6 +59,18 @@ export const nodes = {
     label: 'About_Poco',
     doc: PocoAbout,
     window: { width: 560 },
+  },
+  'poco-demo': {
+    kind: 'demo',
+    label: 'Demo_Poco',
+    demo: {
+      mobileSrc: null,   // TODO: URL of Poco mobile demo MP4 (e.g. https://cdn.../poco-mobile.mp4)
+      webSrc: null,      // TODO: URL of Poco web demo MP4
+      poster: null,      // optional still image URL
+      caption: 'A quick look at Poco in action.',
+      tint: 'rgba(201,174,222,0.28)',
+    },
+    window: { width: 340 },
   },
   'poco-app': {
     kind: 'app',
@@ -71,6 +91,18 @@ export const nodes = {
     label: 'About_Carta',
     doc: CartaAbout,
     window: { width: 560 },
+  },
+  'carta-demo': {
+    kind: 'demo',
+    label: 'Demo_Carta',
+    demo: {
+      mobileSrc: null,   // TODO: URL of Carta mobile demo MP4
+      webSrc: null,      // TODO: URL of Carta web demo MP4
+      poster: null,
+      caption: 'A quick look at Carta in action.',
+      tint: 'rgba(185,217,154,0.30)',
+    },
+    window: { width: 340 },
   },
   'carta-app': {
     kind: 'app',
