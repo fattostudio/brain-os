@@ -5,9 +5,14 @@
   font-family: var(--mono);
 }
 
-/* Root icon layer sits above the wallpaper, below windows */
+/* Root icon layer sits above the wallpaper, below windows. It spans the whole
+   screen, so it must NOT eat clicks in its empty areas — otherwise it blocks
+   the sidebar toggle beneath it. pointer-events:none here lets gaps pass clicks
+   through; the icons themselves re-enable pointer-events (see DesktopIcon). */
 .iconLayer {
   position: absolute;
   inset: 0;
   z-index: 5;
+  pointer-events: none;
 }
+.iconLayer > * { pointer-events: auto; }

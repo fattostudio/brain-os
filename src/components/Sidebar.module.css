@@ -142,7 +142,7 @@
   position: fixed;
   top: 1rem;
   right: 1rem;
-  z-index: 4;            /* closed: below open windows so it never blocks them */
+  z-index: 6;            /* closed: above the icon layer, below open windows */
   width: 36px;
   height: 36px;
   padding: 0;
