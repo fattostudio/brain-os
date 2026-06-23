@@ -110,7 +110,7 @@ export const nodes = {
     label: 'Carta webapp',
     app: {
       name: 'Carta',
-      url: 'https://https://carta.fatto.studio/',  
+      url: 'https://carta.fatto.studio/',  
       mode: 'tab',                         // Carta opens in a new tab
       caption: 'Carta is live — opens in a new tab.',
       tint: 'rgba(185,217,154,0.30)',
