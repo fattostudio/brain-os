@@ -1,6 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/carta", "destination": "https://carta-nine-pearl.vercel.app/carta" },
-    { "source": "/carta/:path*", "destination": "https://carta-nine-pearl.vercel.app/carta/:path*" }
-  ]
-}
